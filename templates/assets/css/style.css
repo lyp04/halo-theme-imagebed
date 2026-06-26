@@ -152,7 +152,7 @@ a { color: inherit; text-decoration: none; }
 .foot__social svg { display: block; }
 
 /* ===== 单页面（关于）/ 想法 ===================================== */
-.page { padding: 60px 28px 90px; }
+.page { padding: 70px 28px 90px; }
 .page__kicker { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 600; text-align: center; }
 .page__title { font-family: var(--font-serif); font-size: clamp(28px, 4.6vw, 42px); font-weight: 700; letter-spacing: .5px; margin: 14px 0 6px; text-align: center; }
 .page__rule { width: 40px; height: 2px; background: var(--accent); margin: 22px auto 40px; opacity: .8; }

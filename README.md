@@ -37,7 +37,7 @@ git clone https://github.com/lyp04/halo-theme-imagebed.git
 | 首页每页篇数 | 图墙每页显示多少篇，默认 12 |
 | 「测评」板块包含的分类 | 首页只显示这些分类的文章（逗号分隔）；其余分类归到 `/thoughts` 页 |
 | 社媒链接 | 小红书 / Bilibili / YouTube / Instagram / X / Threads / 邮箱，留空不显示 |
-| 页脚文字 | 页脚一句话，留空不显示 |
+| 页脚文字 | 页脚左侧文字；留空则显示站点标题 |
 
 ## 文章专属字段（文章设置里）
 

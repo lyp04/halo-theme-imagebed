@@ -5,10 +5,13 @@
   <header th:replace="~{layout :: nav}"></header>
 
   <main class="wrap-wide">
-    <section class="hero" th:with="c=${theme.config?.base}">
-      <div class="hero__kicker" th:if="${c?.masthead_kicker != null and !c.masthead_kicker.isEmpty()}" th:text="${c.masthead_kicker}">REVIEWS &amp; NOTES</div>
-      <h1 class="hero__title" th:text="${site.title}">简约图墙</h1>
-      <p class="hero__bio" th:if="${c?.bio != null and !c.bio.isEmpty()}" th:text="${c.bio}">游戏 · 音乐 · 影像，一处安放观察与随记的地方。</p>
+    <!-- 首页标题区：可选、自填——后台填了「英文小字」或「简介」才显示，留空就隐藏 -->
+    <section class="hero"
+             th:if="${(theme.config?.base?.masthead_kicker != null and !theme.config.base.masthead_kicker.isEmpty()) or (theme.config?.base?.bio != null and !theme.config.base.bio.isEmpty())}"
+             th:with="c=${theme.config?.base}">
+      <div class="hero__kicker" th:if="${!#strings.isEmpty(c.masthead_kicker)}" th:text="${c.masthead_kicker}">REVIEWS</div>
+      <h1 class="hero__title" th:text="${site.title}">站点标题</h1>
+      <p class="hero__bio" th:if="${!#strings.isEmpty(c.bio)}" th:text="${c.bio}">一句话简介</p>
       <div class="hero__rule"></div>
     </section>
 

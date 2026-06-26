@@ -37,12 +37,12 @@ spec:
         - $formkit: text
           name: masthead_kicker
           label: 首页·英文小字
-          value: "REVIEWS & NOTES"
+          value: ""
           help: 首页标题上方的一行英文小字（大写、字距偏宽）。留空则不显示。
         - $formkit: text
           name: bio
           label: 首页·一句话简介
-          value: "游戏 · 音乐 · 影像，一处安放观察与随记的地方。"
+          value: ""
           help: 首页标题下方的一句话简介。留空则不显示。
         - $formkit: text
           name: grid_page_size
@@ -85,5 +85,5 @@ spec:
         - $formkit: text
           name: footer_note
           label: 页脚文字
-          value: "用心记录，自在分享"
-          help: 显示在页脚的一句话（留空则不显示）。
+          value: ""
+          help: 页脚左侧文字；留空则显示站点标题。

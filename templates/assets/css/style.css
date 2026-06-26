@@ -131,12 +131,6 @@ a { color: inherit; text-decoration: none; }
 .post-content a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent); }
 .post-content hr { border: 0; height: 1px; background: var(--line); margin: 40px 0; }
 
-/* 评分卡：极简 */
-.verdict { display: flex; align-items: center; gap: 24px; margin: 50px 0 0; padding: 26px 0; border-top: 2px solid var(--ink); }
-.verdict__grade { font-family: var(--font-serif); font-weight: 700; font-size: clamp(48px, 12vw, 76px); line-height: .9; color: var(--ink); }
-.verdict__meta { display: flex; flex-direction: column; gap: 4px; }
-.verdict__label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-3); }
-.verdict__note { font-size: 16px; color: var(--accent); font-weight: 600; }
 
 /* 文末返回条 / 页脚 */
 .byline { display: flex; margin-top: 44px; padding-top: 26px; border-top: 1px solid var(--line); }

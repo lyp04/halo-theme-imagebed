@@ -41,11 +41,4 @@ spec:
     - $formkit: text
       name: rating_grade
       label: 评分卡 · 等级
-      help: 例：B+ / S / 8.5。留空则不显示评分卡。
-    - $formkit: text
-      name: rating_note
-      label: 评分卡 · 备注
-    - $formkit: text
-      name: rating_label
-      label: 评分卡 · 标签文字
-      value: 个人评级
+      help: 例：B+ / S / 8.5。用于列表/图墙卡片上的评级角标，留空则不显示。

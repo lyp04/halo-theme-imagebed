@@ -45,15 +45,6 @@
 
     <div class="post-content" th:utext="${post.content.content}">正文</div>
 
-    <!-- 评分卡 -->
-    <div class="verdict reveal" th:if="${grade != null and !grade.isEmpty()}">
-      <div class="verdict__grade" th:text="${grade}">B+</div>
-      <div class="verdict__meta">
-        <span class="verdict__label" th:text="${rlabel != null and !rlabel.isEmpty()} ? ${rlabel} : '个人评级'">个人评级</span>
-        <span class="verdict__note" th:if="${note != null and !note.isEmpty()}" th:text="${note}">HIGH B+</span>
-      </div>
-    </div>
-
     <!-- 文末返回首页 -->
     <div class="byline reveal">
       <a class="byline__back" th:href="@{/}">← 返回首页</a>

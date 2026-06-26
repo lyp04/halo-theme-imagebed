@@ -1,0 +1,51 @@
+apiVersion: v1alpha1
+kind: AnnotationSetting
+metadata:
+  name: imagebed-post-fields
+  labels:
+    theme.halo.run/theme-name: imagebed
+spec:
+  targetRef:
+    group: content.halo.run
+    kind: Post
+  formSchema:
+    - $formkit: text
+      name: subtitle
+      label: 副标题
+      help: 大标题下方的一句话（可留空）
+    - $formkit: text
+      name: info1_label
+      label: 信息条 1 · 标签
+      help: 通用键值，自己填标签。游戏例「开发商」、音乐例「艺人」、影视例「导演」
+    - $formkit: text
+      name: info1_value
+      label: 信息条 1 · 内容
+    - $formkit: text
+      name: info2_label
+      label: 信息条 2 · 标签
+    - $formkit: text
+      name: info2_value
+      label: 信息条 2 · 内容
+    - $formkit: text
+      name: info3_label
+      label: 信息条 3 · 标签
+    - $formkit: text
+      name: info3_value
+      label: 信息条 3 · 内容
+    - $formkit: text
+      name: info4_label
+      label: 信息条 4 · 标签
+    - $formkit: text
+      name: info4_value
+      label: 信息条 4 · 内容
+    - $formkit: text
+      name: rating_grade
+      label: 评分卡 · 等级
+      help: 例：B+ / S / 8.5。留空则不显示评分卡。
+    - $formkit: text
+      name: rating_note
+      label: 评分卡 · 备注
+    - $formkit: text
+      name: rating_label
+      label: 评分卡 · 标签文字
+      value: 个人评级

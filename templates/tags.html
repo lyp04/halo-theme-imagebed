@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('标签 · ' + ${site.title})}"></head>
+<body data-page="tags">
+  <header th:replace="~{layout :: nav}"></header>
+  <main class="wrap">
+    <section class="list-head"><div class="list-head__kicker">TAGS</div><h1 class="list-head__title">全部标签</h1><div class="list-head__rule"></div></section>
+    <section class="taxo">
+      <a th:if="${tags != null}" th:each="t : ${tags}" th:href="@{${t.status.permalink}}" th:text="'#' + ${t.spec.displayName}">#标签</a>
+      <p class="empty-hint" th:if="${tags == null or #lists.isEmpty(tags)}">还没有标签。</p>
+    </section>
+  </main>
+  <footer th:replace="~{layout :: footer}"></footer>
+  <th:block th:replace="~{layout :: scripts}"></th:block>
+</body>
+</html>

@@ -1,0 +1,19 @@
+apiVersion: theme.halo.run/v1alpha1
+kind: Theme
+metadata:
+  name: imagebed
+spec:
+  displayName: 简约图墙
+  author:
+    name: lyp04
+    website: https://github.com/lyp04
+  description: 通用的极简评测主题。封面图墙首页、留白克制、单一强调色可调；自带「评分卡」与可自定义标签的「信息条」，顶部导航可在后台自由增删，适合游戏 / 音乐 / 影视等各类测评与随记。
+  logo: ""
+  website: https://github.com/lyp04/halo-theme-imagebed
+  version: 1.0.0
+  requires: 2.0.0
+  settingName: imagebed-setting
+  configMapName: imagebed-configmap
+  license:
+    - name: MIT
+      url: https://github.com/lyp04/halo-theme-imagebed/blob/main/LICENSE

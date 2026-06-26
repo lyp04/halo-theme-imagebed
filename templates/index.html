@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head(${site.title})}"></head>
+<body data-page="home">
+  <header th:replace="~{layout :: nav}"></header>
+
+  <main class="wrap-wide">
+    <section class="hero" th:with="c=${theme.config?.base}">
+      <div class="hero__kicker" th:if="${c?.masthead_kicker != null and !c.masthead_kicker.isEmpty()}" th:text="${c.masthead_kicker}">REVIEWS &amp; NOTES</div>
+      <h1 class="hero__title" th:text="${site.title}">简约图墙</h1>
+      <p class="hero__bio" th:if="${c?.bio != null and !c.bio.isEmpty()}" th:text="${c.bio}">游戏 · 音乐 · 影像，一处安放观察与随记的地方。</p>
+      <div class="hero__rule"></div>
+    </section>
+
+    <div class="toolbar">
+      <div class="seg" id="sortseg">
+        <button type="button" class="seg__btn is-active" data-sort="new">最新</button>
+        <button type="button" class="seg__btn" data-sort="grade">评分</button>
+      </div>
+      <input type="search" id="search" class="search" placeholder="搜索测评…" autocomplete="off" aria-label="搜索测评">
+    </div>
+
+    <section id="grid" class="ggrid" th:attr="data-page-size=${theme.config?.base?.grid_page_size ?: '12'}"></section>
+    <nav id="pager" class="gpager" aria-label="分页"></nav>
+
+    <!-- 数据源：由 Halo 渲染全部已发布文章，前端脚本负责排序 + 分页（图墙形式） -->
+    <div id="src" hidden th:with="rc=${',' + (theme.config?.base?.review_categories ?: '游戏简评,游戏长评,视频测评') + ','}">
+      <article th:each="post : ${postFinder.list(1,500).items}"
+        th:if="${#lists.size(post.categories) gt 0 and #strings.contains(rc, ',' + post.categories[0].spec.displayName + ',')}"
+        th:attr="data-title=${post.spec.title},data-url=${post.status.permalink},data-cover=${post.spec.cover},data-ts=${post.spec.publishTime != null ? post.spec.publishTime : ''},data-cat=${#lists.size(post.categories) gt 0 ? post.categories[0].spec.displayName : '游戏'},data-grade=${post.metadata.annotations != null ? post.metadata.annotations.get('rating_grade') : ''}"></article>
+    </div>
+  </main>
+
+  <footer th:replace="~{layout :: footer}"></footer>
+  <th:block th:replace="~{layout :: scripts}"></th:block>
+  <script th:src="@{/assets/js/grid.js(v='126')}"></script>
+</body>
+</html>

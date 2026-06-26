@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('归档 · ' + ${site.title})}"></head>
+<body data-page="archives" th:with="list=${posts != null ? posts : postFinder.list(1, 50)}">
+  <header th:replace="~{layout :: nav}"></header>
+  <main class="wrap">
+    <section class="list-head"><div class="list-head__kicker">ARCHIVES</div><h1 class="list-head__title">全部文章</h1><div class="list-head__rule"></div></section>
+    <section class="feed">
+      <th:block th:each="post : ${list.items}"><th:block th:replace="~{layout :: row(${post})}"></th:block></th:block>
+      <p class="empty-hint" th:if="${#lists.isEmpty(list.items)}">还没有文章。</p>
+    </section>
+    <nav class="pager" th:if="${list.hasPrevious() or list.hasNext()}">
+      <a th:if="${list.hasPrevious()}" th:href="@{${list.prevUrl}}">← 上一页</a><span th:unless="${list.hasPrevious()}"></span>
+      <a th:if="${list.hasNext()}" th:href="@{${list.nextUrl}}">下一页 →</a>
+    </nav>
+  </main>
+  <footer th:replace="~{layout :: footer}"></footer>
+  <th:block th:replace="~{layout :: scripts}"></th:block>
+</body>
+</html>

@@ -1,0 +1,89 @@
+apiVersion: v1alpha1
+kind: Setting
+metadata:
+  name: imagebed-setting
+spec:
+  forms:
+    - group: base
+      label: 基础设置
+      formSchema:
+        - $formkit: text
+          name: accent_color
+          label: 强调色（十六进制）
+          value: "#3d4a6b"
+          help: 用于分类标签、链接、评分等细节。如 #3d4a6b、#2f6e63、#b1543a。
+        - $formkit: repeater
+          name: nav
+          label: 顶部导航
+          help: 右上角导航项，可自由增删、改名称与链接。链接可填站内路径（如 / 、/archives 、/about）或完整网址（如 https://…）。全部删空则回退到默认「首页 / 归档 / 关于」。
+          value:
+            - label: 首页
+              url: /
+            - label: 归档
+              url: /archives
+            - label: 关于
+              url: /about
+          children:
+            - $formkit: text
+              name: label
+              label: 名称
+              validation: required
+              placeholder: 例：首页
+            - $formkit: text
+              name: url
+              label: 链接
+              value: /
+              placeholder: 例：/archives 或 https://…
+        - $formkit: text
+          name: masthead_kicker
+          label: 首页·英文小字
+          value: "REVIEWS & NOTES"
+          help: 首页标题上方的一行英文小字（大写、字距偏宽）。留空则不显示。
+        - $formkit: text
+          name: bio
+          label: 首页·一句话简介
+          value: "游戏 · 音乐 · 影像，一处安放观察与随记的地方。"
+          help: 首页标题下方的一句话简介。留空则不显示。
+        - $formkit: text
+          name: grid_page_size
+          label: 首页每页篇数
+          value: "12"
+          help: 首页图墙每页显示多少篇，默认 12。
+        - $formkit: text
+          name: review_categories
+          label: 「测评」板块包含的分类
+          value: "游戏简评,游戏长评,视频测评"
+          help: 首页图墙只显示这些分类的文章（用分类名称、英文逗号分隔）；其余分类的文章归到「想法」页（/thoughts）。例：游戏简评,游戏长评,视频测评
+        - $formkit: text
+          name: social_xiaohongshu
+          label: 社媒·小红书主页链接（留空则不显示）
+          value: ""
+        - $formkit: text
+          name: social_bilibili
+          label: 社媒·Bilibili 主页链接（留空则不显示）
+          value: ""
+        - $formkit: text
+          name: social_youtube
+          label: 社媒·YouTube 链接（留空则不显示）
+          value: ""
+        - $formkit: text
+          name: social_instagram
+          label: 社媒·Instagram 链接（留空则不显示）
+          value: ""
+        - $formkit: text
+          name: social_x
+          label: 社媒·X 链接（留空则不显示）
+          value: ""
+        - $formkit: text
+          name: social_threads
+          label: 社媒·Threads 链接（留空则不显示）
+          value: ""
+        - $formkit: text
+          name: social_email
+          label: 社媒·邮箱（留空则不显示，只填地址不用加 mailto:）
+          value: ""
+        - $formkit: text
+          name: footer_note
+          label: 页脚文字
+          value: "用心记录，自在分享"
+          help: 显示在页脚的一句话（留空则不显示）。

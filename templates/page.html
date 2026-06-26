@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head(${singlePage.spec.title} + ' · ' + ${site.title})}"></head>
+<body th:attr="data-page=${singlePage.spec.slug}">
+  <header th:replace="~{layout :: nav}"></header>
+
+  <!-- 想法：游戏以外内容（音乐/影像/随记）的图墙 -->
+  <main th:if="${singlePage.spec.slug == 'thoughts'}" class="wrap-wide">
+    <section class="thoughts-head">
+      <h1 class="page__title" th:text="${singlePage.spec.title}">想法</h1>
+      <div class="page__rule"></div>
+    </section>
+    <div class="toolbar toolbar--end">
+      <input type="search" id="search" class="search" placeholder="搜索想法…" autocomplete="off" aria-label="搜索想法">
+    </div>
+    <section id="grid" class="ggrid" th:attr="data-page-size=${theme.config?.base?.grid_page_size ?: '12'}"></section>
+    <nav id="pager" class="gpager"></nav>
+    <div id="src" hidden th:with="rc=${',' + (theme.config?.base?.review_categories ?: '游戏简评,游戏长评,视频测评') + ','}">
+      <article th:each="post : ${postFinder.list(1,500).items}"
+        th:if="${#lists.isEmpty(post.categories) or not #strings.contains(rc, ',' + post.categories[0].spec.displayName + ',')}"
+        th:attr="data-title=${post.spec.title},data-url=${post.status.permalink},data-cover=${post.spec.cover},data-ts=${post.spec.publishTime != null ? post.spec.publishTime : ''},data-cat=${#lists.size(post.categories) gt 0 ? post.categories[0].spec.displayName : '随记'},data-grade=${post.metadata.annotations != null ? post.metadata.annotations.get('rating_grade') : ''}"></article>
+    </div>
+  </main>
+
+  <!-- 其它单页面（关于 等）：标题 + 正文 -->
+  <main th:unless="${singlePage.spec.slug == 'thoughts'}" class="wrap wrap--read page">
+    <h1 class="page__title" th:text="${singlePage.spec.title}">关于</h1>
+    <div class="page__rule"></div>
+    <div class="post-content" th:utext="${singlePage.content.content}">内容</div>
+  </main>
+
+  <footer th:replace="~{layout :: footer}"></footer>
+  <th:block th:replace="~{layout :: scripts}"></th:block>
+  <script th:src="@{/assets/js/grid.js(v='126')}"></script>
+</body>
+</html>

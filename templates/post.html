@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      th:with="ann=${post.metadata.annotations},
+               subtitle=${ann != null ? ann.get('subtitle') : null},
+               grade=${ann != null ? ann.get('rating_grade') : null},
+               note=${ann != null ? ann.get('rating_note') : null},
+               rlabel=${ann != null ? ann.get('rating_label') : null},
+               cat=${#lists.size(post.categories) gt 0 ? post.categories[0].spec.displayName : '随记'},
+               authorName=${post.owner != null and post.owner.displayName != null and !post.owner.displayName.isEmpty() ? post.owner.displayName : site.title},
+               avatar=${post.owner != null ? post.owner.avatar : null},
+               l1=${ann != null ? ann.get('info1_label') : null}, v1=${ann != null ? ann.get('info1_value') : null},
+               l2=${ann != null ? ann.get('info2_label') : null}, v2=${ann != null ? ann.get('info2_value') : null},
+               l3=${ann != null ? ann.get('info3_label') : null}, v3=${ann != null ? ann.get('info3_value') : null},
+               l4=${ann != null ? ann.get('info4_label') : null}, v4=${ann != null ? ann.get('info4_value') : null}">
+<head th:replace="~{layout :: head(${post.spec.title + ' · ' + site.title})}"></head>
+<body data-page="post">
+  <div id="progress"></div>
+  <header th:replace="~{layout :: nav}"></header>
+
+  <main class="wrap wrap--read article">
+    <div class="article__cat" th:text="${cat}">分类</div>
+    <h1 class="article__title" th:text="${post.spec.title}">文章标题</h1>
+    <p class="article__sub" th:if="${subtitle != null and !subtitle.isEmpty()}" th:text="${subtitle}">副标题</p>
+    <div class="article__dateline">
+      <span th:text="${authorName}">作者</span>
+      <span th:if="${post.spec.publishTime != null}">·</span>
+      <span th:if="${post.spec.publishTime != null}" th:text="${#dates.format(post.spec.publishTime, 'yyyy-MM-dd')}">2026-06-25</span>
+      <!-- 预留位：如需在日期后显示「阅读时长」等可选小信息，先在 annotation-setting.yaml 加一个字段（如 read_time），
+           再在此加： <span th:if="${ann?.get('read_time') != null and !ann.get('read_time').isEmpty()}" th:text="${ann.get('read_time')}"></span>
+           —— 未填写时不渲染。 -->
+    </div>
+
+    <div class="cover" th:if="${post.spec.cover != null and !post.spec.cover.isEmpty()}">
+      <img th:src="${post.spec.cover}" th:alt="${post.spec.title}"/>
+    </div>
+
+    <!-- 信息条：4 组通用键值，填了内容才显示 -->
+    <div class="info"
+       th:if="${(v1 != null and !v1.isEmpty()) or (v2 != null and !v2.isEmpty()) or (v3 != null and !v3.isEmpty()) or (v4 != null and !v4.isEmpty())}">
+      <span class="info__item" th:if="${v1 != null and !v1.isEmpty()}"><span class="info__k" th:text="${l1}">标签</span><span class="info__v" th:text="${v1}">内容</span></span>
+      <span class="info__item" th:if="${v2 != null and !v2.isEmpty()}"><span class="info__k" th:text="${l2}">标签</span><span class="info__v" th:text="${v2}">内容</span></span>
+      <span class="info__item" th:if="${v3 != null and !v3.isEmpty()}"><span class="info__k" th:text="${l3}">标签</span><span class="info__v" th:text="${v3}">内容</span></span>
+      <span class="info__item" th:if="${v4 != null and !v4.isEmpty()}"><span class="info__k" th:text="${l4}">标签</span><span class="info__v" th:text="${v4}">内容</span></span>
+    </div>
+
+    <div class="post-content" th:utext="${post.content.content}">正文</div>
+
+    <!-- 评分卡 -->
+    <div class="verdict reveal" th:if="${grade != null and !grade.isEmpty()}">
+      <div class="verdict__grade" th:text="${grade}">B+</div>
+      <div class="verdict__meta">
+        <span class="verdict__label" th:text="${rlabel != null and !rlabel.isEmpty()} ? ${rlabel} : '个人评级'">个人评级</span>
+        <span class="verdict__note" th:if="${note != null and !note.isEmpty()}" th:text="${note}">HIGH B+</span>
+      </div>
+    </div>
+
+    <!-- 文末返回首页 -->
+    <div class="byline reveal">
+      <a class="byline__back" th:href="@{/}">← 返回首页</a>
+    </div>
+  </main>
+
+  <footer th:replace="~{layout :: footer}"></footer>
+  <th:block th:replace="~{layout :: scripts}"></th:block>
+</body>
+</html>

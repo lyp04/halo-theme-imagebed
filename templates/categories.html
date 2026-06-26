@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head('分类 · ' + ${site.title})}"></head>
+<body data-page="categories">
+  <header th:replace="~{layout :: nav}"></header>
+  <main class="wrap">
+    <section class="list-head"><div class="list-head__kicker">CATEGORIES</div><h1 class="list-head__title">全部分类</h1><div class="list-head__rule"></div></section>
+    <section class="taxo">
+      <a th:if="${categories != null}" th:each="c : ${categories}" th:href="@{${c.status.permalink}}" th:text="${c.spec.displayName}">分类</a>
+      <p class="empty-hint" th:if="${categories == null or #lists.isEmpty(categories)}">还没有分类。</p>
+    </section>
+  </main>
+  <footer th:replace="~{layout :: footer}"></footer>
+  <th:block th:replace="~{layout :: scripts}"></th:block>
+</body>
+</html>

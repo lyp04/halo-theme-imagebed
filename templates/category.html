@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head(${category.spec.displayName} + ' · ' + ${site.title})}"></head>
+<body data-page="category">
+  <header th:replace="~{layout :: nav}"></header>
+  <main class="wrap">
+    <section class="list-head"><div class="list-head__kicker">CATEGORY</div><h1 class="list-head__title" th:text="${category.spec.displayName}">分类</h1><div class="list-head__rule"></div></section>
+    <section class="feed">
+      <th:block th:each="post : ${posts.items}"><th:block th:replace="~{layout :: row(${post})}"></th:block></th:block>
+      <p class="empty-hint" th:if="${#lists.isEmpty(posts.items)}">该分类下还没有文章。</p>
+    </section>
+    <nav class="pager" th:if="${posts.hasPrevious() or posts.hasNext()}">
+      <a th:if="${posts.hasPrevious()}" th:href="@{${posts.prevUrl}}">← 上一页</a><span th:unless="${posts.hasPrevious()}"></span>
+      <a th:if="${posts.hasNext()}" th:href="@{${posts.nextUrl}}">下一页 →</a>
+    </nav>
+  </main>
+  <footer th:replace="~{layout :: footer}"></footer>
+  <th:block th:replace="~{layout :: scripts}"></th:block>
+</body>
+</html>
